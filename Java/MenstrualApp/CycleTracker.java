@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-
+import java.time.temporal.ChronoUnit;
 public class CycleTracker{
 
 	public static LocalDate calculateNextPeriodDate(String lastPeriodDate, int averageCycleLength){
@@ -21,10 +21,7 @@ public class CycleTracker{
 		String message = """
 Your fertile Window starts on %s
 It can typically go up to 6 days
-
- Ends at: %s  
-
-		""".formatted(fertileWindowStart, fertileWindowEnd);
+Ends at: %s  """.formatted(fertileWindowStart, fertileWindowEnd);
 		return message;
 	}
 	public static String printperiodSpan(String lastPeriodDate, int averageCycleLength, int averagePeriodLength){
@@ -32,15 +29,16 @@ It can typically go up to 6 days
 		LocalDate endDate = startDate.plusDays(averagePeriodLength);
 		String message = """
 Your period starts on %s and
-Ends on %s
-		""".formatted(startDate,endDate);
+Ends on %s""".formatted(startDate,endDate);
 
 		return message;
 	}
 
-
-
-
+	public static long getCountDown(String lastPeriodDate, int averageCycleLength){
+		LocalDate nextPeriod = calculateNextPeriodDate(lastPeriodDate ,averageCycleLength);
+		long count = ChronoUnit.DAYS.between(LocalDate.now(), nextPeriod);
+		return count;
+	}
 
 
 

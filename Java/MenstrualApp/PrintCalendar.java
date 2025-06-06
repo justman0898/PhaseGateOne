@@ -16,8 +16,9 @@ public class PrintCalendar{
 		 .forEach(day -> {					
 		System.out.printf("%4d", day);
 		if(row.incrementAndGet() % 7 == 0){
-			System.out.println();
+			System.out.println();	
 		}});
+	System.out.println();
 	}
 
 
