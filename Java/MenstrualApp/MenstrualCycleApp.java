@@ -1,4 +1,5 @@
 import java.util.InputMismatchException;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.time.LocalDate;
 public class MenstrualCycleApp{
@@ -22,17 +23,22 @@ Mark the first day of your period (Day 1).
 Count up to the day before your next period starts.
 That number is your cycle length.
 
-00. EXIT......
+0. EXIT......
 		""");
-			System.out.print("Choose an option: ");
-			/*
-			try{
-
-			}
-		
-			*/
-			userInput = scanner.nextInt();
-			scanner.nextLine();
+			boolean validInput = true;
+			while(validInput){
+				try{
+				System.out.print("Choose an option: ");			
+				userInput = scanner.nextInt();
+				scanner.nextLine();
+				if(userInput == 1 || userInput == 2 || userInput == 0){
+					validInput = false;
+				}
+				}catch(InputMismatchException exception){
+					System.out.println("Wrong Input");
+					scanner.nextLine();
+				}
+			}			
 			switch(userInput){
 				case 1 -> {
 					boolean inSignUp = true;
@@ -75,7 +81,8 @@ That number is your cycle length.
 				}
 				case 2 -> {
 					boolean inView = true;
-					while(inView){						
+					while(inView){
+						try{						
 						PrintCalendar.printCalendar(lastPeriodDate);
 						System.out.println();
 						LocalDate next = CycleTracker.calculateNextPeriodDate(lastPeriodDate, averageCycleLength);
@@ -84,34 +91,42 @@ That number is your cycle length.
 Your next period is expected on: %s
 Estimated ovulation day: %s
 """.formatted(next, ovulation);
-						System.out.println(message);
+						System.out.println(message);						
 						System.out.println(CycleTracker.calculateFertileWindow(lastPeriodDate, averageCycleLength));
 						System.out.println(CycleTracker.printperiodSpan(lastPeriodDate, averageCycleLength,periodLength));
-						System.out.println("0. BACK");
-						boolean isValid = false;
-						while(!isValid){
+						}catch(DateTimeParseException | NullPointerException exception){
+							System.out.println("No profile Created. Press Any Key");
+							scanner.nextLine();
+						}
+						boolean isValid = true;
+						while(isValid){
+							System.out.println("0. BACK");
 							try{
-								int back = scanner.nextInt();
-								isValid = true;								
+							
+								int back = scanner.nextInt();												
 								if(back == 0){
-									
-									break;
+									isValid = false;
+									inView = false;
+
 								}else{
-									System.out.println("Enter a valid input!");
-									
-								}
+									System.out.println("Enter a valid input!");									
+								}														
 							}catch(InputMismatchException exception){
 								System.out.println("Wrong Input");
 								scanner.nextLine();
 							}
-						}	
+						}
 						
 						
 
 					}
 				}//
-				
+				case 0 -> {
+					inMainMenu = false;
 
+
+ 
+				}	
 
 			}
 		
