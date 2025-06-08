@@ -2,6 +2,7 @@ import java.util.Date;
 import java.time.LocalDate; 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.InputMismatchException;
 public class CashierMachine{
 	static final double vat = 0.175;
 	private List<List<String>> itemsQuantityPrices = new ArrayList<>();	
@@ -121,14 +122,12 @@ Customers Name: %s
 ======================================================================
 					Bill Total:	%.2f
 ======================================================================
-THIS IS NOT AN RECIEPT KINDLY PAY.50
+THIS IS NOT AN RECIEPT KINDLY PAY %.2f
 
 
 How much did the customer give to you? 
-		""".formatted(subTotal, discount, vat , totalBill);
+		""".formatted(subTotal, discount, vat , totalBill, totalBill);
 		return message;
-	
-
 	}
 
 	public void printFullReciept(String name){
@@ -137,8 +136,43 @@ How much did the customer give to you?
 		System.out.println(printRestOfSlip());
 	
 	}
+	public double getCustomerBalance(double amountPaid){		 	
+		double totalBill = getTotalBill();
+		if (amountPaid >= totalBill){
+			double customerDue = amountPaid - totalBill;
+			return customerDue;
+		}else{
+			throw new InputMismatchException("Amount paid cannot be less than bill");
+		}
+	}
+	public String printFinalReciept(double amountPaid){
+		double subTotal = getTotal();
+		double discount = getDiscountAmount();
+		double vat = getVatValue();
+		double totalBill = getTotalBill();
+		double balance = getCustomerBalance(amountPaid);
+		String message = """
 
+----------------------------------------------------------------------
 
+					SubTotal: 	%.2f
+					Discount:	%.2f
+					Vat @ 17.5%%:	%.2f
+======================================================================
+					Bill Total:	%.2f
+					Amount Paid:	%.2f
+					Balance:	%.2f
+======================================================================
+			THANK YOU FOR YOUR PATRONAGE
+======================================================================
+		""".formatted(subTotal, discount, vat , totalBill, amountPaid, balance);
+		return message;
+	}
 
-	
+	public void printFullFinalReciept(double amountPaid, String name){
+		System.out.println(printRecieptHeader(name));
+		addTotal();
+		System.out.println(printFinalReciept(amountPaid));
+	}
+
 }
