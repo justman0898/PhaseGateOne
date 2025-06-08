@@ -28,7 +28,7 @@ Ends at: %s  """.formatted(fertileWindowStart, fertileWindowEnd);
 		LocalDate startDate = calculateNextPeriodDate(lastPeriodDate, averageCycleLength);
 		LocalDate endDate = startDate.plusDays(averagePeriodLength);
 		String message = """
-Your period starts on %s and
+Your next period starts on %s and
 Ends on %s""".formatted(startDate,endDate);
 
 		return message;
