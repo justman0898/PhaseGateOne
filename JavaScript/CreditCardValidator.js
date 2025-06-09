@@ -24,7 +24,7 @@ function checkCardType(array){
 	}
 		return "Invalid Card";
 }	
-function getCardLength(int[] array){
+function getCardLength(array){
 	return array.length;
 }
 function checkForNegative(array){
@@ -50,7 +50,7 @@ function firstStep(array){
 	}
 	return sum;
 }
-function addDigitsInOdd(int[] array){
+function addDigitsInOdd(array){
 	let total = 0;
 	for(let counter = 0; counter < array.length; counter++){
 		if(counter % 2 != 0){
@@ -97,4 +97,25 @@ function printCardDetails(array) {
 
     return message;
 }
+function convertStringToArray(strNumbers) {
+    const numbers = [];
+
+    for (let i = 0; i < strNumbers.length; i++) {
+        const ch_number = strNumbers.charAt(i);
+        const number = parseInt(ch_number, 10); 
+        numbers.push(number);
+    }
+
+    return numbers;
+}
+
+
+const prompt = require('prompt-sync')();
+cardNo = prompt("Hello, Kindly Enter Card details to verify: ");
+cardNos = convertStringToArray(cardNo);
+console.log(printCardDetails(cardNos));
+
+
+
+
 

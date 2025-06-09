@@ -95,11 +95,13 @@ public class CreditCard{
 		LocalDate time = LocalDate.now();
 		Date now = new Date();
 		String message = """
+
+
 **********************************************
 **Credit Card Type: %s
 **Credit Card Number: %s
 **Credit Card Length: %d
-**Credit Card ValidityStatus: %s
+**Credit Card Validity Status: %s
 
 		Date: %s %tT
 **********************************************
