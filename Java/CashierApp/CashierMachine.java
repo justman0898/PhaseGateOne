@@ -53,20 +53,24 @@ public class CashierMachine{
 		double amount = 0;		
 		int quantity = 0;
 		double price = 0;
+		 
 		for(int counter = 0; counter < itemsQuantityPrices.size(); counter++){
-			for(int count = 0; count < 1; count++){ 
+			List<String> itemDetails = itemsQuantityPrices.get(counter);
+			if(itemDetails.size() < 4){			 
 				quantity = Integer.parseInt(itemsQuantityPrices.get(counter).get(1));
 				price = Double.parseDouble(itemsQuantityPrices.get(counter).get(2));
 				amount = quantity * price;
-				amountStr = String.valueOf(amount);
-				itemsQuantityPrices.get(counter).add(amountStr);				
+				amountStr = String.valueOf(amount);		
+				itemsQuantityPrices.get(counter).add(amountStr);
 			}						
 		}
+		
 		for(List<String> itemsQuantityPrice : itemsQuantityPrices){
 			for(String each: itemsQuantityPrice){
 				System.out.print("\t"+each+"\t");
 			}
 			System.out.println();
+		
 		}		
 	}
 	public static String printRecieptHeader(String name){
@@ -82,9 +86,9 @@ TEL: 09068325098
 Date: %s %tT
 Cashier: Cashier's name
 Customers Name: %s
-======================================================================
+============================================================================
 	Item(s)      QTY            PRICE	       TOTAL(N)
-----------------------------------------------------------------------
+----------------------------------------------------------------------------
 			""".formatted(todaysDate, now, customer1.getName());	
 		return message;
 	}
@@ -114,14 +118,14 @@ Customers Name: %s
 		
 		String message = """
 
-----------------------------------------------------------------------
+---------------------------------------------------------------------------------
 
 					SubTotal: 	%.2f
 					Discount:	%.2f
 					Vat @ 17.5%%:	%.2f
-======================================================================
+=================================================================================
 					Bill Total:	%.2f
-======================================================================
+=================================================================================
 THIS IS NOT AN RECIEPT KINDLY PAY %.2f
 
 
@@ -153,18 +157,18 @@ How much did the customer give to you?
 		double balance = getCustomerBalance(amountPaid);
 		String message = """
 
-----------------------------------------------------------------------
+-------------------------------------------------------------------------------
 
 					SubTotal: 	%.2f
 					Discount:	%.2f
 					Vat @ 17.5%%:	%.2f
-======================================================================
+===============================================================================
 					Bill Total:	%.2f
 					Amount Paid:	%.2f
 					Balance:	%.2f
-======================================================================
+===============================================================================
 			THANK YOU FOR YOUR PATRONAGE
-======================================================================
+===============================================================================
 		""".formatted(subTotal, discount, vat , totalBill, amountPaid, balance);
 		return message;
 	}

@@ -44,12 +44,11 @@ public class Driver{
 							price = scanner.nextLine();
 							Double.parseDouble(price);
 							customer1.addItem(item,quantity,price);
+							
 						}
 						case "no" -> {
-							System.out.println("How much discount will  he get?");
-							
-							discount = scanner.nextDouble();
-							//customer1.addItem(item,quantity,price);
+							System.out.println("How much discount will  he get?");				
+							discount = scanner.nextDouble();						
 							customer1.setDiscount(discount);
 							customer1.printFullReciept(name);
 							amount = scanner.nextDouble();
