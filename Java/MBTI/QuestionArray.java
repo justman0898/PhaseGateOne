@@ -1,10 +1,13 @@
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 public class QuestionArray{
-	List<String> extrovertedVsIntroverted = new ArrayList<>();	 
-	List<String> sensingVsIntuitive = new ArrayList<>();	
-	List<String> thinkingVsFeeling = new ArrayList<>();	
-	List<String> judgingVsPerceptive = new ArrayList<>();
+	static List<String> extrovertedVsIntroverted = new ArrayList<>();	 
+	static List<String> sensingVsIntuitive = new ArrayList<>();	
+	static List<String> thinkingVsFeeling = new ArrayList<>();	
+	static List<String> judgingVsPerceptive = new ArrayList<>();
 	
 	public static List<String> addextrovertedVsIntrovertedQuestions(){
 		extrovertedVsIntroverted.add("A.expend energy, enjoy groups");
@@ -58,19 +61,52 @@ public class QuestionArray{
 		judgingVsPerceptive.add("B.latitude, freedom");
 		return judgingVsPerceptive;
 	} 
-	public static void 
-	
-
-
-
-
-
-
-
-
-
-
-
-
+	public static List<List<String>> printQuestions1(){
+		Scanner scanner = new Scanner(System.in);
+		List<String> introvertVsExtroverts1 = addextrovertedVsIntrovertedQuestions();
+		List<String> sensingVsIntuitive1 = addsensingVsIntuitive();
+		List<String> thinkingVsFeeling1 = addThinkingVsFeeling();
+		List<String> judgingVsPerceptive1 = addJudgingVsPerceptive();
+		List<List<String>> allQuestions = Arrays.asList(introvertVsExtroverts1,sensingVsIntuitive1,thinkingVsFeeling1,judgingVsPerceptive1);
+		List<List<String>> answers = new ArrayList<>();
+		
+        	for (int i = 0; i < allQuestions.size(); i++) {
+            		answers.add(new ArrayList<>());
+       		}		
+		int max = allQuestions.stream()
+			.mapToInt(List::size)
+			.max()
+			.getAsInt();
+		for(int round = 0; round < max; round+=2){
+			for(int count = 0; count<allQuestions.size();count++){		
+				List<String> currentList = allQuestions.get(count);
+				System.out.print(currentList.get(round));
+				System.out.println("\t" + currentList.get(round + 1));
+				System.out.println("Your answer: ");
+				String answer = scanner.nextLine().toLowerCase();
+				answers.get(count).add(answer);
+			}
+		}
+		return answers;
+	}
+	public static List<Integer> getnoOfAsInEachRow(){
+		List<List<String>> answers = printQuestions1();
+		List<Integer> noOfAsInEachRow = answers.stream()
+					.map(innerList -> (int) innerList.stream()					
+					.filter(letter -> letter.startsWith("a"))
+					.count())
+					.collect(Collectors.toList());
+		return noOfAsInEachRow;
+	}	
+	public static List<Integer> getnoOfBsInEachRow(){
+		List<List<String>> answers = printQuestions1();
+		List<Integer> noOfBsInEachRow = answers.stream()
+						.map(innerList -> (int) innerList.stream()
+						.filter(letter -> letter.startsWith("b"))
+						.count())
+						.collect(Collectors.toList());
+		return noOfBsInEachRow;
+	}
 
 }
+
