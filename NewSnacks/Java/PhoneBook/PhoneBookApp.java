@@ -67,7 +67,34 @@ public class PhoneBookApp{
 					}
 				
 				}
-				case 4 -> {
+				case 2-> {
+					System.out.println("Enter first name to delete");
+					firstName = scanner.nextLine();
+					PhoneBookFunctions.searchContactFirstName(contacts, firstName);
+					System.out.println("Deleted successfully");
+
+				}
+				case 3 ->{
+					System.out.println("Enter first name to search");
+					System.out.println();
+					firstName = scanner.nextLine();
+					System.out.println(PhoneBookFunctions.searchContactFirstName(contacts, firstName));
+					System.out.println("Thank you");
+					System.out.println();
+
+		
+				}
+				case 4 ->{
+					System.out.println("Enter last name to search");
+					System.out.println();
+					lastName = scanner.nextLine();
+					System.out.println(PhoneBookFunctions.searchContactFirstName(contacts, lastName));
+					System.out.println("Thank you");
+					System.out.println();
+
+		
+				}	
+				case 0 -> {
 					inmainMenu = false;
 
 
