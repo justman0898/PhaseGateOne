@@ -16,7 +16,10 @@ public class TestStudentGrade{
     		students.add(new Student());
 		students.get(0).setName("Student 1");
 		students.get(1).setName("Student 2");
-		students.get(0).setSubjectsScores(67, 21, 49);
+		students.get(0).setSubjectsScores(67);
+		students.get(0).setSubjectsScores(21);
+		students.get(0).setSubjectsScores(49);
+
 	}
 	@Test
 	public void testSetName(){		

@@ -21,11 +21,11 @@ public class Student{
 	public int getPosition(){
 		return position;
 	}
-	public void setSubjectsScores(int...scores){
-		for (int score : scores) {
-        		subjectScores.add(score);		
-	    	}
-		
+	public void setSubjectsScores(int score){
+		if(score < 0 || score >= 100){
+			throw new NumberFormatException("Invalid Score, score cannot be negative or over 100");
+		}
+        	subjectScores.add(score);		
 	}
 	public List<Integer> getSubScores(){
 		return subjectScores;

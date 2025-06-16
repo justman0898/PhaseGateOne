@@ -17,7 +17,7 @@ public class Driver{
 		students.get(0).setSubjectsScores(67, 21, 49);
 		students.get(1).setSubjectsScores(98, 62, 56);
 		students.get(2).setSubjectsScores(93, 34, 27);
-		students.get(3).setSubjectsScores(97, 83, 66);
+		students.get(3).setSubjectsScores(78, 83, 66);
 		
 		//System.out.println(StudentGradeFunctions.getHightestInSub1(students, 2));
 		//System.out.println(StudentGradeFunctions.printSummary1(students));
@@ -25,7 +25,13 @@ public class Driver{
 		//System.out.println(StudentGradeFunctions.sortTotals(students));
 		System.out.println(StudentGradeFunctions.setPositions(students));
 		System.out.println(StudentGradeFunctions.printSummary1(students));
-		System.out.println(StudentGradeFunctions.getHightestInSub1(students, 1));
+		System.out.println(StudentGradeFunctions.printSubSummary(students, 1));
+		System.out.println(StudentGradeFunctions.getLowestInSub1(students, 1));
+		System.out.println(StudentGradeFunctions.getClassTotal(students));
+		System.out.println(StudentGradeFunctions.printSummary(students));
+		
+
+
 		
 		//sortedTotalsIndex
 
