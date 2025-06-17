@@ -45,10 +45,7 @@ def printCalendar(date):
 			
 		
 
-printCalendar("2025-05-28")
-date = "2025-05-28"
-print(period_window(date, 28, 5))
-print(fertile_window(date, 28))
+
 
 
 

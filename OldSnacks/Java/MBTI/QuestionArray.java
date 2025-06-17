@@ -93,8 +93,8 @@ public class QuestionArray{
 		List<List<String>> answers = printQuestions1();
 		List<Integer> noOfAsInEachRow = answers.stream()
 					.map(innerList -> (int) innerList.stream()					
-					.filter(letter -> letter.startsWith("a"))
-					.count())
+						.filter(letter -> letter.startsWith("a"))
+						.count())
 					.collect(Collectors.toList());
 		return noOfAsInEachRow;
 	}	
@@ -102,11 +102,47 @@ public class QuestionArray{
 		List<List<String>> answers = printQuestions1();
 		List<Integer> noOfBsInEachRow = answers.stream()
 						.map(innerList -> (int) innerList.stream()
-						.filter(letter -> letter.startsWith("b"))
-						.count())
+							.filter(letter -> letter.startsWith("b"))
+							.count())
 						.collect(Collectors.toList());
 		return noOfBsInEachRow;
 	}
+	public static long noOfAs(int index){
+		int newIndex = index - 1;
+		List<List<String>> allQuestions = printQuestions1();
+		List<String> desiredBatch = allQuestions.get(newIndex);
+		long noOfAs = desiredBatch.stream()
+					.filter(answers -> answers.equalsIgnoreCase("a"))
+					.count();		
+		return noOfAs;
+	}
+	public static void printOutCome(String name, List<List<String>> answerGroup){		
+		System.out.println("Hello " +name+ " you selected");
+		for(int i = 0; i < getQuestions().size(); i++){
+            		
+            		List<String> questionGroup = getQuestions().get(i);
+            		List<String> sublist = answerGroup.get(i);
+
+            		for (int j = 0; j < sublist.size(); j++) {
+                		System.out.println("Q: " + questionGroup.get(j * 2));
+                		System.out.println(questionGroup.get(j * 2 + 1));
+				System.out.println("A: " + sublist.get(j));
+            		}
+			System.out.println();
+        	}
+	}
+	public static List<List<String>> getQuestions(){
+		Scanner scanner = new Scanner(System.in);
+		List<String> introvertVsExtroverts1 = addextrovertedVsIntrovertedQuestions();
+		List<String> sensingVsIntuitive1 = addsensingVsIntuitive();
+		List<String> thinkingVsFeeling1 = addThinkingVsFeeling();
+		List<String> judgingVsPerceptive1 = addJudgingVsPerceptive();
+		List<List<String>> allQuestions = Arrays.asList(introvertVsExtroverts1,sensingVsIntuitive1,thinkingVsFeeling1,judgingVsPerceptive1);
+		//List<List<String>> answers = new ArrayList<>();
+		
+        	return allQuestions;
+	}
+
 
 }
 
